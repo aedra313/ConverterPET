@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Input, Button } from 'antd'
 import s from './Converter.module.scss'
 
@@ -17,6 +17,10 @@ export default function Converter(): JSX.Element {
             className={s.field}
             style={{ width: '151px' }}
             placeholder="“15 usd” in “uah”"
+            onChange={
+              (e: React.FormEvent<HTMLInputElement>) =>
+                  console.log(e) /* TODO: push change to form values */
+            }
           />
           <Button type="primary" className={s.converterBtn}>
             {' '}

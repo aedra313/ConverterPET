@@ -4,19 +4,21 @@ import s from './Body.module.scss'
 import Logo from './logo/Logo'
 import SocialMedia from "./socialMedia/SocialMedia";
 import Converter from "./converter/Converter";
+import RateCalculator from "./rateCalculator/RateCalculator"
 
 const { Header, Footer, Content } = Layout
 
 export default function Body(): JSX.Element {
   return (
     <Layout className={s.body}>
-      <Header className={s.header}>
+      <header className={s.header}>
         <Logo />
-      </Header>
-      <Content className={s.content}>
+      </header>
+      <main className={s.content}>
           <Converter />
-      </Content>
-      <Footer className={s.footer}>
+          <RateCalculator />
+      </main>
+      <footer className={s.footer}>
         <div className={s.footerContentWrap}>
           <Logo />
           <p className={s.credits}>
@@ -26,7 +28,7 @@ export default function Body(): JSX.Element {
           </p>
         </div>
         <SocialMedia className={s.socialMedia} />
-      </Footer>
+      </footer>
     </Layout>
   )
 }
