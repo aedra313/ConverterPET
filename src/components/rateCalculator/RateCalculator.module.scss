@@ -1,0 +1,80 @@
+.headline {
+  margin: 35px auto 15px;
+
+
+  font-family: 'Overpass', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  text-align: center;
+
+  color: #D2D2D2;
+}
+
+.rateTable {
+  margin-top: 35px;
+}
+
+.currencyColumn {
+  padding-right: 31px;
+  padding-bottom: 13px;
+
+  font-family: 'Overpass', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+
+  color: #D2D2D2;
+}
+
+.valueColumn {
+  font-family: 'Overpass', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+
+  color: #D2D2D2;
+}
+
+.selectDecor {
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #BEEECB;
+  width: 224px;
+  height: 58px;
+  border-radius: 16px;
+
+  & p {
+    margin: 0 0 0 16px;
+    padding-top: 6px;
+    font-family: Overpass, 'Maven Pro', sans-serif;
+    font-size: 10px;
+    font-style: italic;
+    font-weight: 100;
+    line-height: 13px;
+    text-align: left;
+
+  }
+}
+
+.dropdown {
+  background: #68BF8C;
+  font-family: 'Overpass', 'Maven Pro', sans-serif;
+  font-style: italic;
+  font-weight: 100;
+  font-size: 14px;
+  line-height: 18px;
+  color: rgba(33, 37, 35, 0.7);
+}
+
+.selectOption {
+  &:hover{
+    background-color: #9CDBB2;
+  }
+  &.ant-select-item-option-selected{
+    background-color: #9CDBB2 !important;
+  }
+}

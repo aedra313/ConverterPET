@@ -23,6 +23,7 @@
         "react-hooks"
     ],
     "rules": {
+        "react/jsx-no-bind": "off",
         "import/extensions": [
             "error",
             "ignorePackages",

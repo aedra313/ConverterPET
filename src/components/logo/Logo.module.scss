@@ -1,0 +1,30 @@
+.logoItem {
+  margin: 0 auto;
+  display: flex;
+}
+
+.name {
+  margin-left: 5px;
+
+  font-family: 'Maven Pro', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18.64px;
+  line-height: 24px;
+
+  color: #EEEEEE;
+}
+
+@media (min-width: 1440px) {
+
+  .img {
+    height: 42px;
+    width: 42px;
+  }
+
+  .name {
+    margin-left: 7px;
+    font-size: 26px;
+    line-height: 42px;
+  }
+}
