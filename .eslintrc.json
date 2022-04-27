@@ -23,7 +23,8 @@
         "react-hooks"
     ],
     "rules": {
-
+        "@typescript-eslint/ban-ts-comment" : "off",
+        "no-restricted-syntax" : "off",
         "react/jsx-no-bind": "off",
         "import/extensions": [
             "error",

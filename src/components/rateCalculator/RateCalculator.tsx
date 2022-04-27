@@ -4,17 +4,17 @@ import s from './RateCalculator.module.scss'
 import { store } from '../../app/store'
 
 export default function Converter(): JSX.Element {
-  const [currency, setCurrency] = useState('uah')
+  const [currency, setCurrency] = useState('UAH')
   const [calculated, setCalculated] = useState<string[]>([])
   const [amount, setAmount] = useState(1)
 
 
   const { Option } = Select
 
-  function converter(value: string): void {
+   function converter(value: string): void {
     const array: string[] = []
-    setCurrency(value === 'rur' ? '' : value)
-    if (value === 'uah') {
+    setCurrency(value === 'RUR' ? '' : value)
+    if (value === 'UAH') {
       array.push(
         String(
           Math.round(amount * store.getState().reducer.rate[0].buy * 100) / 100
@@ -75,7 +75,7 @@ export default function Converter(): JSX.Element {
       <div className={s.selectDecor}>
         <p>Select the default currency</p>
         <Select
-          defaultValue="uah"
+          defaultValue="UAH"
           bordered={false}
           onChange={(value) => converter(value)}
           dropdownClassName={s.dropdown}
@@ -93,10 +93,10 @@ export default function Converter(): JSX.Element {
           <Option className={s.selectOption} value="EUR">
             EUR
           </Option>
-          <Option className={s.selectOption} value="uah">
+          <Option className={s.selectOption} value="UAH">
             UAH
           </Option>
-          <Option className={s.selectOption} value="rur">
+          <Option className={s.selectOption} value="RUR">
             RUR
           </Option>
         </Select>
