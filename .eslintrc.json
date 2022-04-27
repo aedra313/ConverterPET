@@ -23,6 +23,7 @@
         "react-hooks"
     ],
     "rules": {
+        "jsx-a11y/control-has-associated-label": "off",
         "@typescript-eslint/ban-ts-comment" : "off",
         "no-restricted-syntax" : "off",
         "react/jsx-no-bind": "off",

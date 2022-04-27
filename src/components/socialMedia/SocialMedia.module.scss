@@ -2,6 +2,21 @@
   display: flex;
 }
 
-.twitter {
+.twitterIcon {
   margin-right: 20px;
+}
+
+@media (min-width: 1440px) {
+
+  .twitterIcon {
+    margin-right: 40px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .facebookIcon {
+    margin-right: 40px;
+    width: 40px;
+    height: 40px;
+  }
 }
