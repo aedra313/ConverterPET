@@ -3,19 +3,42 @@ import { Form, Input, Button } from 'antd'
 import s from './Converter.module.scss'
 import { store } from '../../app/store'
 
-type IsMobileProps = {
-  isMobile: boolean
-}
+type IValidated = 'correct' | 'RUR' | 'nonExisting' | 'equivalent' | 'empty'
 
-export default function Converter({ isMobile }: IsMobileProps): JSX.Element {
+let amount: number
+let calculated: string[] = []
+let validated: IValidated
+
+const supportedCurrencies = ['USD', 'EUR', 'UAH', 'RUR']
+
+export default function Converter(): JSX.Element {
   const [userInput, setUserInput] = useState('')
-  // const [amount, setAmount] = useState<number>(1)
-  // const [calculated, setCalculated] = useState<string[]>([])
-  // const [curr1, setCurr1] = useState('')
-  const [currency2, setCurrency2] = useState('')
   const [convertedResult, setConvertedResult] = useState('')
 
-  const supportedCurrencies = ['USD', 'EUR', 'UAH', 'RUR']
+  const CURRENCIES = {
+    curr1: [
+      userInput[userInput.length - 13],
+      userInput[userInput.length - 12],
+      userInput[userInput.length - 11],
+    ]
+      .join('')
+      .toUpperCase(),
+    curr2: [
+      userInput[userInput.length - 4],
+      userInput[userInput.length - 3],
+      userInput[userInput.length - 2],
+    ]
+      .join('')
+      .toUpperCase(),
+  }
+
+  const FAIL_RESULT = {
+    empty: '',
+    rur: 'Руський воєнный корабль, йди нахуй',
+    equivalent: `You can't convert ${CURRENCIES.curr1} in ${CURRENCIES.curr2}`,
+    nonExisting: "we don't know this one, sorry :(",
+    unknown: 'Unknown error',
+  }
 
   async function inputHandler(
     event: React.ChangeEvent<HTMLInputElement>
@@ -24,79 +47,52 @@ export default function Converter({ isMobile }: IsMobileProps): JSX.Element {
     await setUserInput(enteredAmount)
     return userInput
   }
-  console.log(userInput)
-  let amount: number
 
   function getAmount(): number {
     const inputArr = userInput.split('')
-    console.log(inputArr)
     const numArray = []
     // @ts-ignore
     // eslint-disable-next-line guard-for-in
     for (const i in inputArr) {
       // @ts-ignore
       if (inputArr[i] >= 0 && inputArr[i] !== ' ') {
-        console.log(inputArr[i])
         numArray.push(inputArr[i])
-        console.log(numArray)
-        console.log(numArray)
       }
     }
-    console.log(numArray.join(''))
     amount = parseInt(numArray.join(''), 10)
-    console.log(amount)
     return amount
   }
-  let curr1: string
-  let curr2: string
-  function getCurr1(): string {
-    curr1 = [
-      userInput[userInput.length - 13],
-      userInput[userInput.length - 12],
-      userInput[userInput.length - 11],
-    ]
-      .join('')
-      .toUpperCase()
-    return curr1
-  }
 
-  function getCurr2(): string {
-    curr2 = [
-      userInput[userInput.length - 4],
-      userInput[userInput.length - 3],
-      userInput[userInput.length - 2],
-    ]
-      .join('')
-      .toUpperCase()
-    setCurrency2(curr2)
-    return curr2
-  }
-
-  function currencyValidator(): void {
+  function currencyValidator(): IValidated {
     if (
-      !supportedCurrencies.includes(curr1) ||
-      !supportedCurrencies.includes(curr2)
+      !supportedCurrencies.includes(CURRENCIES.curr1) ||
+      !supportedCurrencies.includes(CURRENCIES.curr2)
     ) {
-      console.log('Validator exist fail')
-      return alert("This currency doesn't exist or isn't supported yet.")
+      validated = 'nonExisting'
+      return validated
     }
-    if (curr1 === supportedCurrencies[3] || curr2 === supportedCurrencies[3]) {
-      console.log('Validator rur fail')
-      return alert('Русский военный корабль, иди нахуй')
+    if (
+      CURRENCIES.curr1 === supportedCurrencies[3] ||
+      CURRENCIES.curr2 === supportedCurrencies[3]
+    ) {
+      validated = 'RUR'
+      return validated
     }
-    if (curr1 === curr2) {
-      console.log('Validator sameCurr fail')
-      return alert(`Нельзя просто так взять и перевести ${curr1} в ${curr2}.`)
+    if (CURRENCIES.curr1 === '' || CURRENCIES.curr2 === '') {
+      validated = 'empty'
+      return validated
     }
-    return console.log('validation successful')
+    if (CURRENCIES.curr1 === CURRENCIES.curr2) {
+      validated = 'equivalent'
+      return validated
+    }
+    validated = 'correct'
+    return validated
   }
-
-  let calculated: string[]
 
   function converter(): string[] {
     const array: string[] = []
-    console.log(amount)
-    if (curr1 === 'UAH') {
+    if (CURRENCIES.curr1 === 'UAH') {
       array.push(
         String(
           Math.round((amount / store.getState().reducer.rate[0].buy) * 100) /
@@ -105,14 +101,12 @@ export default function Converter({ isMobile }: IsMobileProps): JSX.Element {
         String(
           Math.round((amount / store.getState().reducer.rate[1].buy) * 100) /
             100
-        ),
-        String(amount)
+        )
       )
-      console.log(calculated)
       calculated = array
       return calculated
     }
-    if (curr1 === store.getState().reducer.rate[0].ccy) {
+    if (CURRENCIES.curr1 === store.getState().reducer.rate[0].ccy) {
       array.push(
         String(amount),
         String(
@@ -126,11 +120,10 @@ export default function Converter({ isMobile }: IsMobileProps): JSX.Element {
           Math.round(amount * store.getState().reducer.rate[0].sale * 100) / 100
         )
       )
-      console.log(array)
       calculated = array
       return calculated
     }
-    if (curr1 === store.getState().reducer.rate[1].ccy) {
+    if (CURRENCIES.curr1 === store.getState().reducer.rate[1].ccy) {
       array.push(
         String(
           Math.round(
@@ -139,38 +132,49 @@ export default function Converter({ isMobile }: IsMobileProps): JSX.Element {
               100
           ) / 100
         ),
-
         String(amount),
         String(
           Math.round(amount * store.getState().reducer.rate[1].sale * 100) / 100
         )
       )
-      console.log(calculated)
       calculated = array
       return calculated
     }
     array.push(
-      'Руський воєнный корабль, йди нахуй',
-      'Руський воєнный корабль, йди нахуй',
-      'Руський воєнный корабль, йди нахуй'
+      'Unknown error',
+      'Unknown error',
+      'Unknown error'
     )
-    console.log(calculated)
     calculated = array
     return calculated
   }
 
   function returnValue(): string {
     const index = supportedCurrencies.findIndex(
-      (currency) => currency === curr2
+      (currency) => currency === CURRENCIES.curr2
     )
-    setConvertedResult(() => calculated[index])
+    setConvertedResult(() => `${calculated[index]} ${CURRENCIES.curr2}`)
+
+    setConvertedResult(() => 'Unknown error')
+    // eslint-disable-next-line no-unused-expressions
+    validated === 'RUR' && setConvertedResult(() => FAIL_RESULT.rur)
+    // eslint-disable-next-line no-unused-expressions
+    validated === 'empty' && setConvertedResult(() => FAIL_RESULT.empty)
+    // eslint-disable-next-line no-unused-expressions
+    validated === 'nonExisting' &&
+      setConvertedResult(() => FAIL_RESULT.nonExisting)
+    // eslint-disable-next-line no-unused-expressions
+    validated === 'equivalent' &&
+      setConvertedResult(() => FAIL_RESULT.equivalent)
+    // eslint-disable-next-line no-unused-expressions
+    validated === 'correct' &&
+      setConvertedResult(() => `${calculated[index]} ${CURRENCIES.curr2}`)
+
     return convertedResult
   }
 
   function submitHandler(): string {
     getAmount()
-    getCurr1()
-    getCurr2()
     currencyValidator()
     converter()
     returnValue()
@@ -220,9 +224,7 @@ export default function Converter({ isMobile }: IsMobileProps): JSX.Element {
           </Form.Item>
         </Form>
         <p className={s.inputSubscript}>Type your request in the field above</p>
-        <p className={s.result}>
-          {convertedResult} {currency2}
-        </p>
+        <p className={s.result}>{convertedResult}</p>
       </div>
     </div>
   )

@@ -11,7 +11,7 @@ import { setRates } from '../app/reducer'
 
 export default function Body(): JSX.Element {
   const [isMobile, setMobile] = useState(false);
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(true)
   const TABLET_WIDTH = 1440
 
   // Window resize Handler
@@ -64,8 +64,9 @@ export default function Body(): JSX.Element {
         <Logo />
       </header>
       <main className={s.content}>
-          {!toggle && <Converter isMobile={isMobile} />}
-        {isMobile || toggle && <RateCalculator />}
+          {(isMobile || toggle) && <Converter />}
+        {(isMobile || !toggle) &&  <RateCalculator /> }
+
         {!isMobile && (
           <Button type="primary" className={s.changePage} onClick={pageHandler}>
             {' '}
