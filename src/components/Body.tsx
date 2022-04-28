@@ -9,6 +9,12 @@ import RateCalculator from './rateCalculator/RateCalculator'
 import { store } from '../app/store'
 import { setRates } from '../app/reducer'
 
+type JSONValue = string | number | boolean | { [x: string]: JSONValue }
+interface ServerResponse {
+  response: any
+  value: any
+  data: Array<JSONValue>
+}
 export default function Body(): JSX.Element {
   const [isMobile, setMobile] = useState(false);
   const [toggle, setToggle] = useState(true)
@@ -25,13 +31,6 @@ export default function Body(): JSX.Element {
     return () => window.removeEventListener('resize', resizeHandler)
   }, [])
   const [checkData, setCheckData] = useState(true)
-
-  type JSONValue = string | number | boolean | { [x: string]: JSONValue }
-  interface ServerResponse {
-    response: any
-    value: any
-    data: Array<JSONValue>
-  }
 
   // Axios request
 
