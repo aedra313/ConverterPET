@@ -3,11 +3,11 @@ import { Select } from 'antd'
 import s from './RateCalculator.module.scss'
 import { store } from '../../app/store'
 
+const amount = 1;
+
 export default function Converter(): JSX.Element {
   const [currency, setCurrency] = useState('UAH')
   const [calculated, setCalculated] = useState<string[]>([])
-  const [amount, setAmount] = useState(1)
-
 
   const { Option } = Select
 

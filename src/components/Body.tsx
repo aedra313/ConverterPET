@@ -9,9 +9,15 @@ import RateCalculator from './rateCalculator/RateCalculator'
 import { store } from '../app/store'
 import { setRates } from '../app/reducer'
 
+type JSONValue = string | number | boolean | { [x: string]: JSONValue }
+interface ServerResponse {
+  response: any
+  value: any
+  data: Array<JSONValue>
+}
 export default function Body(): JSX.Element {
   const [isMobile, setMobile] = useState(false);
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(true)
   const TABLET_WIDTH = 1440
 
   // Window resize Handler
@@ -26,19 +32,12 @@ export default function Body(): JSX.Element {
   }, [])
   const [checkData, setCheckData] = useState(true)
 
-  type JSONValue = string | number | boolean | { [x: string]: JSONValue }
-  interface ServerResponse {
-    response: any
-    value: any
-    data: Array<JSONValue>
-  }
-
   // Axios request
 
   useEffect(() => {
     if (checkData) {
       axios
-        .get<ServerResponse>('https://demo0493226.mockable.io/')
+        .get<ServerResponse>(' https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
         .then((response: AxiosResponse<ServerResponse>) => {
           store.dispatch(setRates(response.data))
         })
@@ -64,8 +63,9 @@ export default function Body(): JSX.Element {
         <Logo />
       </header>
       <main className={s.content}>
-          {!toggle && <Converter isMobile={isMobile} />}
-        {isMobile || toggle && <RateCalculator />}
+          {(isMobile || toggle) && <Converter />}
+        {(isMobile || !toggle) &&  <RateCalculator /> }
+
         {!isMobile && (
           <Button type="primary" className={s.changePage} onClick={pageHandler}>
             {' '}
