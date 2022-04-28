@@ -1,3 +1,34 @@
+README
+
+This project is a test task.
+
+Technologies used:
+ - ReactJS v18
+ - TypeScript v4.6.3
+ - Redux v4.2.0
+ - AntDesign
+
+
+Technical requirement:
+https://docs.google.com/document/d/1e8OCo1ou1gaHB1FhaLVWUj3hz62pfpQVS1ZQd1N8g-c/edit?usp=sharing
+
+
+Model is taken from here. Is NOT supposed to be pixelperfect
+https://www.figma.com/file/MeVCNf6MaxdCzdQjrdRXsk/FINANCE-LANDING-PAGE-UI-kit-(Community)?node-id=0%3A1
+
+
+Expected behaviour:
+ - In mobile resolution: 1 page containing 2 features
+ - In tablet resolution & higher: 2 pages containing 1 component each
+ - Supported currencies: UAH USD EUR. 
+ - In RUR currency some undocumented behaviour possible. IS NOT A BUG
+ - Converter component is supposed to show equivalent of base currency in another one. Request is entered in the text field. 
+     - Request template:  
+        ## "15 uah" in "usd"
+        Text field is not case sensitive
+     -  All spaces are mandatory
+ - Currency rates component is supposed to show currency rates (in table) according to the selected currency (in dropdown)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
