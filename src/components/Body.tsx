@@ -37,7 +37,7 @@ export default function Body(): JSX.Element {
   useEffect(() => {
     if (checkData) {
       axios
-        .get<ServerResponse>('https://demo0493226.mockable.io/')
+        .get<ServerResponse>(' https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
         .then((response: AxiosResponse<ServerResponse>) => {
           store.dispatch(setRates(response.data))
         })
