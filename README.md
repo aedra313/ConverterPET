@@ -21,7 +21,7 @@ Expected behaviour:
  - In mobile resolution: 1 page containing 2 features
  - In tablet resolution & higher: 2 pages containing 1 component each
  - Supported currencies: UAH USD EUR. 
- - In RUR currency some undocumented behaviour possible. IS NOT A BUG
+ - In RUR currency some undocumented behaviour is possible. IS NOT A BUG
  - Converter component is supposed to show equivalent of base currency in another one. Request is entered in the text field. 
      - Request template:  
         ## "15 uah" in "usd"
