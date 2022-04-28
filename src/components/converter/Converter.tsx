@@ -3,12 +3,16 @@ import { Form, Input, Button } from 'antd'
 import s from './Converter.module.scss'
 import { store } from '../../app/store'
 
-export default function Converter(): JSX.Element {
+type IsMobileProps = {
+  isMobile: boolean
+}
+
+export default function Converter({ isMobile }: IsMobileProps): JSX.Element {
   const [userInput, setUserInput] = useState('')
   // const [amount, setAmount] = useState<number>(1)
   // const [calculated, setCalculated] = useState<string[]>([])
   // const [curr1, setCurr1] = useState('')
-  // const [curr2, setCurr2] = useState('')
+  const [currency2, setCurrency2] = useState('')
   const [convertedResult, setConvertedResult] = useState('')
 
   const supportedCurrencies = ['USD', 'EUR', 'UAH', 'RUR']
@@ -64,7 +68,7 @@ export default function Converter(): JSX.Element {
     ]
       .join('')
       .toUpperCase()
-
+    setCurrency2(curr2)
     return curr2
   }
 
@@ -146,21 +150,20 @@ export default function Converter(): JSX.Element {
       return calculated
     }
     array.push(
-      'Русский военный корабль, иди нахуй',
-      'Русский военный корабль, иди нахуй',
-      'Русский военный корабль, иди нахуй'
+      'Руський воєнный корабль, йди нахуй',
+      'Руський воєнный корабль, йди нахуй',
+      'Руський воєнный корабль, йди нахуй'
     )
     console.log(calculated)
     calculated = array
     return calculated
   }
 
-
   function returnValue(): string {
     const index = supportedCurrencies.findIndex(
       (currency) => currency === curr2
     )
-    setConvertedResult( ()=>calculated[index])
+    setConvertedResult(() => calculated[index])
     return convertedResult
   }
 
@@ -171,11 +174,11 @@ export default function Converter(): JSX.Element {
     currencyValidator()
     converter()
     returnValue()
-        return convertedResult
+    return convertedResult
   }
 
   return (
-    <>
+    <div>
       <p className={s.headline}>Best converter ever</p>
       <div className={s.wrap}>
         <p className={s.slogan}>
@@ -198,14 +201,13 @@ export default function Converter(): JSX.Element {
           >
             <Input
               className={s.field}
-              style={{ width: '151px' }}
+              style={{ width: '200px' }}
               placeholder="“15 usd” in “uah”"
               defaultValue=""
               maxLength={20}
               onChange={inputHandler}
             />
           </Form.Item>
-          <p>{convertedResult}</p>
           <Form.Item>
             <Button
               type="primary"
@@ -218,7 +220,10 @@ export default function Converter(): JSX.Element {
           </Form.Item>
         </Form>
         <p className={s.inputSubscript}>Type your request in the field above</p>
+        <p className={s.result}>
+          {convertedResult} {currency2}
+        </p>
       </div>
-    </>
+    </div>
   )
 }

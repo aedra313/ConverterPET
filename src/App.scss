@@ -59,7 +59,7 @@ table {
 
 .App {
   background-color: #101010;
-
+  height: 100%;
 }
 
 .App-logo {
@@ -95,5 +95,13 @@ table {
   }
   100% {
     transform: translateY(0px);
+  }
+}
+@media (min-width: 1440px) {
+  .App {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 }

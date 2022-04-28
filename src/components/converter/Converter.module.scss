@@ -12,31 +12,41 @@
 
 .wrap {
     margin-top: 300px;
-}
-
-.slogan {
-    margin-bottom: 40px;
-
+    color: #D2D2D2;
     font-family: 'Overpass', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
     line-height: 19px;
+}
 
-    color: #D2D2D2;
+.slogan {
+    margin-bottom: 40px;
+}
+
+.result {
+    font-size: 20px;
 }
 
 .converterBtn {
     height: 66px;
     width: 45px;
-    margin-top: -30px;
-    margin-left: 225px;
+    margin-top: -40px;
+    margin-left: 235px;
     border: none;
     background: url("../../../src/img/ConverterBtn.svg");
 
 &:hover {
-    opacity: 50%
+    background: url("../../../src/img/ConverterBtn.svg");
+    height: 66px;
+    width: 45px;
+    opacity: 50%;
 }
+    &:focus{
+        background: url("../../../src/img/ConverterBtn.svg");
+        height: 66px;
+        width: 45px;
+    }
 }
 
 .field {
@@ -54,10 +64,22 @@
 
     color: rgba(169, 169, 169, 0.6);
 }
+    &:hover {
+        border-bottom: 1px solid #6FCF97
+    }
+    &:focus {
+        background-color: transparent;
+        border-bottom: 1px solid #6FCF97 ;
+        font-family: 'Overpass', sans-serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 19px;
+    }
 }
 
 .inputSubscript{
-    margin-top: -15px;
+    margin-top: -75px;
 
     font-family: 'Overpass', sans-serif;
     font-style: normal;
@@ -66,4 +88,51 @@
     line-height: 11px;
 
     color: #A9A9A9;
+}
+
+
+@media (min-width: 1440px) {
+    .headline {
+        font-size: 48px;
+        line-height: 61px;
+        text-align: center;
+        margin: 0;
+    }
+
+    .wrap {
+        margin-top: 83px;
+    }
+
+    .slogan {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .converterBtn {
+        height: 88px;
+        width: 60px;
+        margin-left: 250px;
+        margin-top:-100px;
+
+    &:hover{
+        height: 88px;
+        width: 60px;
+    }
+        &:focus{
+            background: url("../../../src/img/ConverterBtn.svg");
+            height: 88px;
+            width: 60px;
+        }
+    }
+
+    .inputSubscript{
+        margin-top: -85px;
+        font-size: 13px;
+    }
+
+    .result {
+        font-size: 30px;
+        line-height: 36px;
+        margin-top: 45px;
+    }
 }

@@ -8,8 +8,12 @@ export default function SocialMedia({
 }: HTMLAttributes<HTMLAnchorElement>): JSX.Element {
   return (
     <div className={`${s.socialWrap} ${className}`}>
-      <TwitterIcon className={s.twitter} />
-      <FacebookIcon />
+      <a href="https://twitter.com" title="Our Twittah">
+        <TwitterIcon className={s.twitterIcon} />
+      </a>
+      <a href="https://www.facebook.com/" title="Our Facebook">
+        <FacebookIcon className={s.facebookIcon}/>
+      </a>
     </div>
   )
 }
