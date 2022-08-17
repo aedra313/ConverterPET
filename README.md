@@ -1,6 +1,5 @@
 README
 
-This project is a test task.
 
 Technologies used:
  - ReactJS v18
@@ -9,8 +8,6 @@ Technologies used:
  - AntDesign
 
 
-Technical requirement:
-https://docs.google.com/document/d/1e8OCo1ou1gaHB1FhaLVWUj3hz62pfpQVS1ZQd1N8g-c/edit?usp=sharing
 
 
 Model is taken from here. Is NOT supposed to be pixelperfect
